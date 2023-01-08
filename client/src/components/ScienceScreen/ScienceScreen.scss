@@ -1,0 +1,33 @@
+.science-top-block {
+  display: flex;
+}
+.science-screen {
+  &-title {
+    font-size: 35px;
+    margin: auto;
+  }
+  &-subtitle {
+    display: block;
+    font-size: 35px;
+    text-align: center;
+  }
+
+  .technology-card {
+    margin-right: 20px;
+  }
+
+  .card-technology {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 170px;
+  
+    &-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &-middle-active {
+      margin: 70px 0px;
+    }
+  }
+}
