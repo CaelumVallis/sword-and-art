@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useWebSocket } from './api/main';
 import { ScienceScreen } from './components/ScienceScreen/ScienceScreen';
 import { CommonScreen } from './components/CommonScreen/CommonScreen';
+import { DetailedScreen } from './components/DetailedScreen/DetailedScreen';
 
 const App = () => {
   const [newPlayerName, setNewPlayerName] = useState('');
@@ -20,10 +21,9 @@ const App = () => {
   };
 
   return (
-    // <div><ScienceScreen/></div>
     <>
       <div>
-        <CommonScreen />
+        <DetailedScreen/>
       </div>
       <div>
         <button onClick={connectNewPlayer}>Connect</button>

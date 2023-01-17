@@ -109,6 +109,7 @@ export const CommonScreen = () => {
         </div>
       </div>
       <div className={`${CLASSNAME_PREFIX}-description-block`}>
+        <BackArrowBtn />
         <div className="top-description-block">
           <div className="card-description">АФАФАФА КАДЫРОВ ДЫРОВ ЧУШКА</div>
           <div className="sell-build-buttons">

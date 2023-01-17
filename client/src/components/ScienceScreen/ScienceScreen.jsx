@@ -32,10 +32,10 @@ export const ScienceScreen = () => {
             {technologies.topRow.map(() => <TechnologyCard />)}
           </div>
           <div className={`${CARDTECHNOLOGY_PREFIX}-middle-active`}>
-          {technologies.middleRow.map(() => <TechnologyCard />)}
+            {technologies.middleRow.map(() => <TechnologyCard />)}
           </div>
           <div className={`${CARDTECHNOLOGY_PREFIX}-bottom-active`}>
-          {technologies.bottomRow.map(() => <TechnologyCard />)}
+            {technologies.bottomRow.map(() => <TechnologyCard />)}
           </div>
         </div>
       </div>
