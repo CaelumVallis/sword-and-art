@@ -5,7 +5,8 @@ const wss = new ws.Server({
 }, () => {console.log('Server started on 4000')})
 
 const store = {
-    data: []
+    data: {},
+    newPlayerName: ''
 }
 
 wss.on('connection', (ws) => {
@@ -13,13 +14,14 @@ wss.on('connection', (ws) => {
         msg = JSON.parse(msg)
 
         switch(msg.event) {
-            case 'message':
-                store.data.push(msg)
-                broadCastMessage(store.data)
+            case 'STORE_UPDATE':
+                store.data = msg.data
+                broadCastMessage(store)
                 break;
-            case 'connection':
-                store.data.push(msg)
-                broadCastMessage(store.data)
+            case 'CONNECTION':
+                store.newPlayerName = msg.newPlayerName
+                console.log(store)
+                broadCastMessage(store)
                 break;
         }
     })

@@ -3,18 +3,17 @@ import { useState, useRef } from "react"
 export const useWebSocket = () => {
     const socket = useRef() 
     const [connected, setConnected] = useState(false)
-    const [data, setData] = useState([])
+    const [dataFromServer, setDataFromServer] = useState({})
 
-
-    const connectWS = () => {
+    const connectWS = (newPlayerName) => {
         socket.current = new WebSocket('ws://localhost:4000') 
 
         socket.current.onopen = () => {
             setConnected(true)
         
             const message = {
-                event: 'connection',
-                message: 'NEW_CONECTION',
+                event: 'CONNECTION',
+                newPlayerName,
                 id: Date.now()
             }
     
@@ -22,7 +21,7 @@ export const useWebSocket = () => {
         }
     
         socket.current.onmessage = ({ data }) => {
-            setData(JSON.parse(data))
+            setDataFromServer(JSON.parse(data))
         }
     
         socket.current.onclose = () => {
@@ -34,15 +33,15 @@ export const useWebSocket = () => {
         }
     }
     
-    const sendWS = (value) => {
+    const sendWS = (data) => {
         const message = {
-            event: 'message',
-            message: value,
+            event: 'STORE_UPDATE',
+            data,
             id: Date.now()
         }
     
         socket.current.send(JSON.stringify(message))
     }
 
-    return { connectWS, sendWS, statusWS: connected, dataWS: data };
+    return { connectWS, sendWS, statusWS: connected, dataWS: dataFromServer };
 }

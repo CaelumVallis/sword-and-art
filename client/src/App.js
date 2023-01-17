@@ -1,25 +1,38 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useWebSocket } from './api/main'
-import { ScienceScreen } from './components/ScienceScreen/ScienceScreen'
-import { CommonScreen } from './components/CommonScreen/CommonScreen'
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useWebSocket } from './api/main';
+import { ScienceScreen } from './components/ScienceScreen/ScienceScreen';
+import { CommonScreen } from './components/CommonScreen/CommonScreen';
 
 const App = () => {
-  const [value, setValue] = useState('nichego')
+  const [newPlayerName, setNewPlayerName] = useState('');
 
   const { connectWS, sendWS, statusWS, dataWS } = useWebSocket();
+
+  const state = useSelector((state) => state);
+
+  const endTurn = () => {
+    sendWS(state);
+  };
+
+  const connectNewPlayer = () => {
+    connectWS(newPlayerName);
+  };
 
   return (
     // <div><ScienceScreen/></div>
     <>
-      <div><CommonScreen/></div>
       <div>
-        <input value={value} onChange={(e) => setValue(e.target.value)}/>
-        <button onClick={connectWS}>Connect</button>
-        <button onClick={() => sendWS(value)}>Send</button>
-        {dataWS.map((el, i) => <p key={i}>{el.message}</p>)}
+        <CommonScreen />
+      </div>
+      <div>
+        <button onClick={connectNewPlayer}>Connect</button>
+        Please, enter your name:
+        <input value={newPlayerName} onChange={(e) => setNewPlayerName(e.target.value)} />
+        <button onClick={endTurn}>Send</button>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
